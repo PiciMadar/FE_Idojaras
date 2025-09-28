@@ -1,0 +1,11 @@
+.hide{
+    display: none;
+}
+#themeSwitch{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+h1{
+    text-align: center;
+}
