@@ -1,6 +1,7 @@
 const passwdRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/; 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+
 async function userRegistration(){
     let name = document.querySelector('#nameField');
     let email = document.querySelector('#emailField');
@@ -24,7 +25,7 @@ async function userRegistration(){
         return;
     }
     try {
-        const res = await fetch(`${ServerURL}/users`, {
+        const res = await fetch(`${SERVER_URL}/users`, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -50,22 +51,22 @@ async function userRegistration(){
 }
 
 async function userLogin() {
-    let email = document.querySelector('#emailField');
-    let password = document.querySelector('#passwordField');
-    if(email.value == "" || password.value == ""){
-        showAlert("Figyelmeztetés", "Nem adtál meg minden adatot!", "warning")
+    let emailF = document.querySelector('#emailField');
+    let passwordF = document.querySelector('#passwordField');
+    if(emailF.value == "" || passwordF.value == ""){
+        showAlert("Hiba!", "Nem adtál meg minden adatot!", "warning")
         return;
     }
 
     let user = {}
     try {
-        const res = await fetch(`${ServerURL}/users/login`, {
+        const res = await fetch(`${SERVER_URL}/users/login`, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                email: emailField.value,
-                password: passwordField.value
-            }),
+                email: emailF.value,
+                password: passwordF.value
+            })
         });
 
         user = await res.json();
@@ -95,7 +96,7 @@ function userLogout(){
 
 async function getProfile() {
     try {
-      const res = await fetch(`${ServerURL}/users/${loggedUser.id}`);
+      const res = await fetch(`${SERVER_URL}/users/${loggedUser.id}`);
       if (!res.ok) throw new Error("Hiba a profil lekérésénél");
   
       const data = await res.json(); 
@@ -114,7 +115,7 @@ async function userProfileUpdate() {
             showAlert("Figyelmeztetés", "Nem adtál meg minden adatot!", "warning")
             return
         }
-        const res = await fetch(`${ServerURL}/users/profile`,{
+        const res = await fetch(`${SERVER_URL}/users/profile`,{
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -155,7 +156,7 @@ async function userPasswordUpdate() {
     }
   
     try {
-      const res = await fetch(`${ServerURL}/users/password`, {
+      const res = await fetch(`${SERVER_URL}/users/password`, {
         method: "PATCH",
         headers: { 
           "Content-Type": "application/json"

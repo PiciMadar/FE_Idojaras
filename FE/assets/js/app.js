@@ -1,8 +1,8 @@
-const SERVER_URL = "http://localhost:5501"
+const SERVER_URL = "http://localhost:3000"
 
 let  loggedUser;
 
-let main = document.querySelector('main')
+let main = document.querySelector('#FoMain')
 let mainNavbar = document.querySelector('#mainMenu')
 let userNavbar = document.querySelector('#userMenu')
 
@@ -17,7 +17,7 @@ lightBTN.addEventListener('click', ( ) => {
     setTheme('light');
     saveTheme('light');
 })
-darktBTN.addEventListener('click', ( ) => {
+darkBTN.addEventListener('click', ( ) => {
     setTheme('dark');
     saveTheme('dark');
 })
@@ -60,13 +60,16 @@ function setThemeBTN(theme) {
 /*-------------------------------------------*/
 
 async function render(view) {
-    main.innerHTML = await (await fetch(`./view/${view}.html`)).text()
+    main.innerHTML = await (await fetch(`view/${view}.html`)).text()
     
     switch (view) {
         case "profile":
             break;
         case "main":
-            break;
+            {
+                setDate();
+                break;    
+            }
         case "statistics":
             break;
         case "calendar":
