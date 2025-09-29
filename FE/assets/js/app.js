@@ -64,6 +64,7 @@ async function render(view) {
     
     switch (view) {
         case "profile":
+            getProfile()
             break;
         case "main":
             {
@@ -73,6 +74,8 @@ async function render(view) {
         case "statistics":
             break;
         case "calendar":
+            await CalendarD()
+            initCalendar();
             break;
         case "register":
             break;

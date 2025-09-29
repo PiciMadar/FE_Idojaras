@@ -10,6 +10,19 @@ function setDate(){
 }
 
 
+async function  getWeathers() {
+    try{
+        let res = await fetch(`${SERVER_URL}/weather`)
+        weathers = await res.json();
+        weathers = weathers.sort((a,b) => new Date(b.date) - new Date(a.date))
+        console.log(weathers)
+        renderWeather()
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
 async function addData(){
     let dateV = document.querySelector('#dateField')
     let typeV = document.querySelector('#typeField')
@@ -58,17 +71,6 @@ async function addData(){
     }
 }
 
-async function  getWeathers() {
-    try{
-        let res = await fetch(`${SERVER_URL}/weather`)
-        weathers = await res.json();
-        weathers = weathers.sort((a,b) => new Date(b.date) - new Date(a.date))
-        console.log(weathers)
-    }
-    catch(err){
-        console.log(err)
-    }
-}
 
 async function renderWeather() {
     let tbody = document.querySelector('#Tablazat')

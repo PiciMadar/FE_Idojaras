@@ -109,10 +109,16 @@ async function getProfile() {
     }
 }
 
+
+
 async function userProfileUpdate() {
+    let name = document.querySelector('#nameField');
+    let email = document.querySelector('#emailField');
+    let password = document.querySelector('#passwordField');
+    let confirmPassword = document.querySelector('#confirmpasswordField');
     try {
-        if(document.getElementById("nameField").value == ""||document.getElementById("emailField").value == ""){
-            showAlert("Figyelmeztetés", "Nem adtál meg minden adatot!", "warning")
+        if(name.value == "" || email.value == ""){
+            showAlert("Hiba!", "Nem adtál meg minden adatot!", "warning")
             return
         }
         const res = await fetch(`${SERVER_URL}/users/profile`,{
@@ -122,8 +128,8 @@ async function userProfileUpdate() {
             },
             body: JSON.stringify({
                 id : loggedUser.id,
-                name: document.getElementById("nameField").value,
-                email: document.getElementById("emailField").value
+                name: name.value,
+                email: email.value
             })
         })
 
@@ -144,15 +150,15 @@ async function userPasswordUpdate() {
   
   
     if (newPassword == "" || confirmPassword == "" || oldPassword == "") {
-      return showAlert("Figyelmeztetés", "Nem adtál meg minden adatot", "warning");
+      return showAlert("Hiba", "Nem adtál meg minden adatot", "warning");
     }
   
     if (newPassword !== confirmPassword) {
-      return showAlert("Figyelmeztetés", "Az új jelszavak nem egyeznek!", "warning");
+      return showAlert("Hiba", " új jelszavak nem egyeznek!", "warning");
     }
   
     if (!passwdRegExp.test(newPassword)) {
-      return showAlert("Figyelmeztetés", "A jelszónak legalább 8 karakterből kell állnia, tartalmaznia kis- és nagybetűt, valamint számot.", "warning");
+      return showAlert("Hiba", "A jelszód túl gyenge.", "warning");
     }
   
     try {
