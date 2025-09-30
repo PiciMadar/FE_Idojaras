@@ -140,6 +140,8 @@ async function renderWeather() {
         ujTType.innerHTML = weather.type
         ujTOPBTN0.innerHTML = '<i class="bi bi-wrench"></i>';
         ujTOPBTN1.innerHTML = '<i class="bi bi-trash-fill"></i>';
+        ujTOPBTN0.style.backgroundColor = "#f2b346"
+        ujTOPBTN1.style.backgroundColor = "#b02f19"
 
 
         tbody.appendChild(ujTr)
@@ -188,5 +190,5 @@ async function deleteWeather(index){
 }
 
 function editWeather(Kijelolt){
-    console.log("WIP" + {Kijelolt})
+    console.log("WIP")
 }

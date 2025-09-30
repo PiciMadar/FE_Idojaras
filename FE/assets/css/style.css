@@ -14,22 +14,11 @@ img{
 	pointer-events: none;
 }
 
-#typeField{
-    width: 100%;
-    height: 100%;
+.container{
+    margin-top: 2%;
+    padding: 2%;
+    border: 1px solid #495057;
     border-radius: 5px;
-    background-color: #212529;
-    border-color: #495057;
-    padding: 2%
+    box-shadow: 11px 11px 16px -5px rgba(0,0,0,0.63);
+    margin-bottom: 4%;
 }
-
-#typeField option{
-    background-color: #212529;
-    border: #495057 1px solid;
-    border-radius: 5px;
-}
-
-#typeField option:hover{
-    box-shadow: 0 0 10px 100px #495057 inset;
-}
-
