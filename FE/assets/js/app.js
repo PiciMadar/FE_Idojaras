@@ -69,9 +69,12 @@ async function render(view) {
         case "main":
             {
                 setDate();
-                break;    
+                await getWeathers()
+                await renderWeather()
+                break;      
             }
         case "statistics":
+            await RenderCanvas()
             break;
         case "calendar":
             await CalendarD()

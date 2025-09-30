@@ -12,15 +12,15 @@ async function CalendarD() {
         weather.forEach(day => {
             events.push(
                 { title: `Típus: ${day.type}`, start: day.date },
-                { title: `Min: ${day.min} °C`, start: day.date, backgroundColor: "green" },
-                { title: `Max: ${day.max} °C`, start: day.date, backgroundColor: "orange" },
+                { title: `Min: ${day.min} °C`, start: day.date, backgroundColor: "blue" },
+                { title: `Max: ${day.max} °C`, start: day.date, backgroundColor: "red" },
 
             )
         });
 
     } catch (err) {
         console.log(err)
-        showAlert("Hiba!", "Hiba az adatok lekérdezésében!", "danger")
+        showAlert("Hiba!", "Hiba az adatok lekérdezése közben!", "danger")
     }
 }
 

@@ -28,14 +28,60 @@ async function addData(){
     let typeV = document.querySelector('#typeField')
     let minV = document.querySelector('#minField')
     let maxV = document.querySelector('#maxField')
+    console.log(dateV.value)
+    console.log(typeV.value)
+    console.log(minV.value)
+    console.log(maxV.value)
+
+    let kivalasztottHonap = new Date(dateV.value).toISOString().split('-')[1]
+    console.log(kivalasztottHonap)
+
     if(dateV.value == '' || typeV.value == '' || minV.value == '' || maxV.value == ''){        
-        showAlert("danger",'Hiba!','Nem adtál meg minden adatot!')
+        showAlert('Hiba!','Nem adtál meg minden adatot!','danger')
         return
     }
-    if(minV.value > maxV.value){
-        showAlert('danger','Hiba!','Nem lehet kevesebb a minimum, már elnézést')
+    if(Number(minV.value) > Number(maxV.value)){
+        showAlert('Hiba!',"Nem lehet kevesebb a maximum, mint a minimum",'danger')
         return
     }
+
+    switch(kivalasztottHonap){
+        case "01" || "02" || "12":
+            if(Number(maxV.value) >= 10 || Number(minV.value) <= -10){
+                if(!confirm("Biztosan ennyi volt a hőmérséklet?"))
+                    {
+                        return;
+                    }
+            }
+            break;
+        case "03" || "04" || "05":
+            if(Number(maxV.value) >= 25 || Number(minV.value) <= 5){
+                if(!confirm("Biztosan ennyi volt a hőmérséklet?"))
+                    {
+                        return;
+                    }
+            }
+            break;
+        case "06" || "07" || "08":
+            if(Number(maxV.value) >= 50 || Number(minV.value) <= 20){
+                if(!confirm("Biztosan ennyi volt a hőmérséklet?"))
+                    {
+                        return;
+                    }
+            }
+            break;
+        case "09" || "10" ||"11":
+            if(Number(maxV.value) >= 25 || Number(minV.value) <= 5){
+                if(!confirm("Biztosan ennyi volt a hőmérséklet?"))
+                    {
+                        return;
+                    }
+            }
+            break;
+        default:
+            break;
+    }
+
 
     try{
         const res = await fetch(`${SERVER_URL}/weather`,{
@@ -48,7 +94,7 @@ async function addData(){
                 date: dateV.value,
                 min: minV.value,
                 max: maxV.value,
-                typeV: typeV.value
+                type: typeV.value
             })        
         })
         const data = await res.json();
@@ -60,10 +106,10 @@ async function addData(){
             typeV.value = ""
             await getWeathers()
             renderWeather()
-            showAlert('success','Woohoo', 'Sikeres felvétel')
+            showAlert('Woohoo', 'Sikeres felvétel','success')
         }
         else{
-            showAlert('danger','Hiba!','Sikertelen felvétel!')
+            showAlert('Hiba!','Sikertelen felvétel!\nEz a dátum már foglalt','danger')
         }
     }
     catch(err){
@@ -126,15 +172,20 @@ async function deleteWeather(index){
                     'Content-Type' : 'application:json'
                 }
             })
+            await getWeathers()
+            renderWeather()
             let data = await res.json()
             if(res.status == 200){
                 showMSG('Success', 'ok', "Yippie")
                 await getWeathers()
-                cancel()
                 renderWeather()
             }
         } catch(err) {
             console.log("Halo")
         }
     }
+}
+
+function editWeather(Kijelolt){
+    console.log("WIP" + {Kijelolt})
 }
