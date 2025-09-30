@@ -129,8 +129,8 @@ async function renderWeather() {
         let ujTMin = document.createElement("td")
         let ujTMax = document.createElement("td")
         let ujTType = document.createElement("td")
-        let ujTOPBTN0 = document.createElement("button")
-        let ujTOPBTN1 = document.createElement("button")
+        let ujTOPBTN0 = document.createElement("td")
+        let ujTOPBTN1 = document.createElement("td")
         let ujtdiv = document.createElement("td")
 
         ujTID.innerHTML = weather.id,
@@ -138,8 +138,9 @@ async function renderWeather() {
         ujTMin.innerHTML = weather.min
         ujTMax.innerHTML = weather.max
         ujTType.innerHTML = weather.type
-        ujTOPBTN0.innerHTML = "🛠"
-        ujTOPBTN1.innerHTML = "🗑"
+        ujTOPBTN0.innerHTML = '<i class="bi bi-wrench"></i>';
+        ujTOPBTN1.innerHTML = '<i class="bi bi-trash-fill"></i>';
+
 
         tbody.appendChild(ujTr)
         ujTr.appendChild(ujTID)

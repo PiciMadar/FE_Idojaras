@@ -7,7 +7,7 @@ async function RenderCanvas() {
 
         weathers.forEach(weather => {
             ujObj={
-                label: weather.date,
+                label:  weather.date,
                 y:[Number(weather.min),Number(weather.max)],
                 name: weather.type
             }
@@ -31,7 +31,7 @@ async function RenderCanvas() {
     var chart = new CanvasJS.Chart("chartContainer", {            
         theme: "dark2",
         title:{
-            text: "Weekly Weather Forecast"              
+            text: "Havi időjárásjelentés"              
         },
         axisY: {
             suffix: " °C",
@@ -60,12 +60,22 @@ async function RenderCanvas() {
         for(var i = 0; i < chart.data[0].dataPoints.length; i++){
             var dpsName = chart.data[0].dataPoints[i].name;
             if(dpsName == "Felhős"){
-                images.push($("<img>").attr("src", "https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/cloudy.png"));
+                images.push($("<img>").attr("src", "./assets/images/cloudy-day.png"));
             } else if(dpsName == "Esős"){
-            images.push($("<img>").attr("src", "https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/rainy.png"));
+            images.push($("<img>").attr("src", "./assets/images/rainy.png"));
             } else if(dpsName == "Napos"){
-                images.push($("<img>").attr("src", "https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/sunny.png"));
+                images.push($("<img>").attr("src", "./assets/images/sun.png"));
             }
+            else if(dpsName == "Viharos"){
+                images.push($("<img>").attr("src", "./assets/images/severe-weather.png"));
+            }
+            else if(dpsName == "Freaky"){
+                images.push($("<img>").attr("src", "./assets/images/tongue.png"));
+            }
+            else if(dpsName == "Szeles"){
+                images.push($("<img>").attr("src", "./assets/images/wind.png"));
+            }
+
     
         images[i].attr("class", dpsName).appendTo($("#chartContainer>.canvasjs-chart-container"));
         positionImage(images[i], i);
