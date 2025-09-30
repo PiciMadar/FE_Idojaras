@@ -11,6 +11,9 @@ async function RenderCanvas() {
                 y:[Number(weather.min),Number(weather.max)],
                 name: weather.type
             }
+            if(adatok.length >= 30){
+                adatok.shift()
+            }
             adatok.push(ujObj)
         });
     }
@@ -18,15 +21,21 @@ async function RenderCanvas() {
         console.log(err)
     }
 
-
+    let maxWeather = 0
+    weathers.forEach(weather =>{
+        if(weather.max > maxWeather ){
+            maxWeather = weather.max
+        }
+    })
 
     var chart = new CanvasJS.Chart("chartContainer", {            
+        theme: "dark2",
         title:{
             text: "Weekly Weather Forecast"              
         },
         axisY: {
             suffix: " °C",
-            maximum: 40,
+            maximum: Number(maxWeather) + 10,
             gridThickness: 0
         },
         toolTip:{
